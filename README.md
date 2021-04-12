@@ -25,7 +25,7 @@ Online [DEMO](http://hifarer.github.io/vueditor/)
 
 ## Installation
 ```javascript
-npm install vueditor-ajulcab
+npm install @ajulcab/vueditor-ajulcab
 ```
 
 If you prefer to use it via script tag, download the last release package and add `vueditor.min.js`, `vueditor.min.css` to your page. 
