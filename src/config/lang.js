@@ -56,7 +56,8 @@ let defaultLang = {
     title: 'Insertar archivo',
     ok: 'OK',
     cancel: 'Cancelar',
-    invalidFile: 'Ningún archivo seleccionado'
+    invalidFile: 'Ningún archivo seleccionado',
+    maxFileZise:'Archivo muy pesado, tamaño máximo: '
   },
   sourceCode: {
     title: 'Source Code'

@@ -15,6 +15,9 @@
     <div :class="$style.wrap">
       <div class="ve-dialog-header">{{lang.title}}<a href="javascript:;" class="ve-close" @click="hideDialog">&times;</a></div>
       <div class="ve-dialog-body">
+        <p>{{realFIlezize(maxFileZise)}}</p>
+      </div>
+      <div class="ve-dialog-body">
         <form ref="form">
           <input type="file" name="image" @change="changeHandler" ref="file">
         </form>
@@ -41,7 +44,8 @@
       return {
         url: '',
         lang: getLang('picture'),
-        uploadUrl: getConfig('uploadUrl')
+        uploadUrl: getConfig('uploadUrl'),
+        maxFileZise:getConfig('maxFileZise'),
       }
     },
     computed: {
@@ -77,35 +81,44 @@
         let obj = this.$refs.file
         let form = this.$refs.form
         let uploadUrl = this.uploadUrl
-        if (this.url) {
-          if (this.$parent.upload) {
-            this.$parent.upload(obj, function (href) {
-              this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<a href="${href}">${this.veditorfilename(href)}</a>`})
+
+        if(f.size <= this.maxFileZise) {
+          if (this.url) {
+            if (this.$parent.upload) {
+              this.$parent.upload(obj, function (href) {
+                this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<a href="${href}">${this.veditorfilename(href)}</a>`})
+                this.hideDialog()
+              }.bind(this))
+            } else if (uploadUrl) {
+              console.log('uploadUrl',uploadUrl);
+              let formData = new window.FormData(form)
+              let xhr = new window.XMLHttpRequest()
+              xhr.open('POST', uploadUrl)
+              xhr.send(formData)
+              xhr.onload = function () {
+                this.$store.dispatch('execCommand', {name: 'insertHTML', value:`<a href="${xhr.responseText}">${this.veditorfilename(xhr.responseText)}</a>`})
+                this.hideDialog()
+              }.bind(this)
+              xhr.onerror = function (err) {
+                window.alert(err)
+              }
+            } else {
+              this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<a href="${this.url}">${this.veditorfilename(this.url)}</a>`})
               this.hideDialog()
-            }.bind(this))
-          } else if (uploadUrl) {
-            console.log('uploadUrl',uploadUrl);
-            let formData = new window.FormData(form)
-            let xhr = new window.XMLHttpRequest()
-            xhr.open('POST', uploadUrl)
-            xhr.send(formData)
-            xhr.onload = function () {
-              this.$store.dispatch('execCommand', {name: 'insertHTML', value:`<a href="${xhr.responseText}">${this.veditorfilename(xhr.responseText)}</a>`})
-              this.hideDialog()
-            }.bind(this)
-            xhr.onerror = function (err) {
-              window.alert(err)
             }
           } else {
-            this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<a href="${this.url}">${this.veditorfilename(this.url)}</a>`})
-            this.hideDialog()
+            window.alert(this.lang.invalidFile)
           }
-        } else {
-          window.alert(this.lang.invalidFile)
+        }else{
+            window.alert(this.lang.maxFileZise+this.realFIlezize(this.maxFileZise) )
         }
+
       },
       veditorfilename(path){
         return path.split(/(\\|\/)/g).pop();
+      },
+      realFIlezize(size){
+        return size/1024/1024;
       }
       
     }

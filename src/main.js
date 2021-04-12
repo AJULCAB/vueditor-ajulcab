@@ -23,6 +23,7 @@ function checkConfig (config) {
     fontName: 'array.object',
     fontSize: 'array.string',
     uploadUrl: 'string',
+    maxFileZise: 1024 * 1024 * 50,
     lang: 'object',
     id: 'string',
     classList: 'array.string',
