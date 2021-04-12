@@ -18,7 +18,9 @@
         <form ref="form">
           <input type="file" name="image" @change="changeHandler" ref="file">
         </form>
-        <div class="ve-preview" v-if="url"><img :src="url"></div>
+        <div class="ve-preview" v-if="url">
+            <a :href="url" target="_blank">{{veditorfilename(url)}}</a>
+        </div>
       </div>
       <div class="ve-dialog-footer">
         <div class="ve-btn-box">
@@ -65,7 +67,8 @@
         if (navigator.userAgent.indexOf('MSIE') >= 1) { // IE
           this.url = obj.value
         } else {
-          if (obj.files.length !== 0 && obj.files.item(0).type.indexOf('image') !== -1) {
+          // if (obj.files.length !== 0 && obj.files.item(0).type.indexOf('image') !== -1) {
+          if (obj.files.length !== 0 && obj.files.item(0) !== -1) {
             this.url = window.URL.createObjectURL(obj.files.item(0))
           }
         }
@@ -77,29 +80,34 @@
         if (this.url) {
           if (this.$parent.upload) {
             this.$parent.upload(obj, function (href) {
-              this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<img src="${href}">`})
+              this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<a href="${href}">${this.veditorfilename(href)}</a>`})
               this.hideDialog()
             }.bind(this))
           } else if (uploadUrl) {
+            console.log('uploadUrl',uploadUrl);
             let formData = new window.FormData(form)
             let xhr = new window.XMLHttpRequest()
             xhr.open('POST', uploadUrl)
             xhr.send(formData)
             xhr.onload = function () {
-              this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<img src="${xhr.responseText}">`})
+              this.$store.dispatch('execCommand', {name: 'insertHTML', value:`<a href="${xhr.responseText}">${this.veditorfilename(xhr.responseText)}</a>`})
               this.hideDialog()
             }.bind(this)
             xhr.onerror = function (err) {
               window.alert(err)
             }
           } else {
-            this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<img src="${this.url}">`})
+            this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<a href="${this.url}">${this.veditorfilename(this.url)}</a>`})
             this.hideDialog()
           }
         } else {
           window.alert(this.lang.invalidFile)
         }
+      },
+      veditorfilename(path){
+        return path.split(/(\\|\/)/g).pop();
       }
+      
     }
   }
 </script>

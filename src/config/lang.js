@@ -53,10 +53,10 @@ let defaultLang = {
     title: 'markdown'
   },
   picture: {
-    title: 'Insert Picture',
+    title: 'Insertar archivo',
     ok: 'OK',
-    cancel: 'Cancel',
-    invalidFile: 'No file selected or selected file is not a picture'
+    cancel: 'Cancelar',
+    invalidFile: 'Ningún archivo seleccionado'
   },
   sourceCode: {
     title: 'Source Code'

@@ -25,7 +25,7 @@ Online [DEMO](http://hifarer.github.io/vueditor/)
 
 ## Installation
 ```javascript
-npm install vueditor
+npm install vueditor-ajulcab
 ```
 
 If you prefer to use it via script tag, download the last release package and add `vueditor.min.js`, `vueditor.min.css` to your page. 
@@ -42,7 +42,7 @@ Use it in the following cases:
 ```javascript
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Vueditor from 'vueditor'
+import Vueditor from 'vueditor-ajulcab'
 
 import 'vueditor/dist/style/vueditor.min.css'
 
@@ -97,7 +97,7 @@ Call `createEditor` and pass specific config as parameter respectively for multi
 
   import Vue from 'vue'
   import Vuex from 'vuex'
-  import { createEditor } from 'vueditor'
+  import { createEditor } from 'vueditor-ajulcab'
 
   import 'vueditor/dist/style/vueditor.min.css'
   
@@ -190,10 +190,11 @@ Default value of the above fields:
   classList: []
 };
 ```
-
+Now Upload any type files.
 ## Change log
 
 See [change log](./docs/changelog.md)
+
 
 ## Bug confirmed
 
