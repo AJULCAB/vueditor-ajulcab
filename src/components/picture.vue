@@ -15,7 +15,7 @@
     <div :class="$style.wrap">
       <div class="ve-dialog-header">{{lang.title}}<a href="javascript:;" class="ve-close" @click="hideDialog">&times;</a></div>
       <div class="ve-dialog-body">
-        <p>{{realFIlezize(maxFileZise)}}</p>
+        <p>Tamaño máximo ({{realFIlezize(maxFileZise)}}Mb)</p>
       </div>
       <div class="ve-dialog-body">
         <form ref="form">
@@ -88,8 +88,8 @@
         let obj = this.$refs.file
         let form = this.$refs.form
         let uploadUrl = this.uploadUrl
-        console.log('sizes',obj.size,this.maxFileZise);
-        if(obj.size <= this.maxFileZise) {
+        console.log('sizes',obj.files[0].size,this.maxFileZise);
+        if(obj.files[0].size <= this.maxFileZise) {
           if (this.url) {
             if (this.$parent.upload) {
               this.$parent.upload(obj, function (href) {
