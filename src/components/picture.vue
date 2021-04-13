@@ -25,6 +25,13 @@
             <a :href="url" target="_blank">{{veditorfilename(url)}}</a>
         </div>
       </div>
+      <div class="ve-dialog-body">
+        <div id="preload_vueditor_ajulcab">
+          <div class="cv-spinner">
+            <span class="spinner"></span>
+          </div>
+        </div>
+      </div>
       <div class="ve-dialog-footer">
         <div class="ve-btn-box">
           <button class="ve-btn" @click="hideDialog">{{lang.cancel}}</button>
@@ -81,8 +88,8 @@
         let obj = this.$refs.file
         let form = this.$refs.form
         let uploadUrl = this.uploadUrl
-
-        if(f.size <= this.maxFileZise) {
+        console.log('sizes',obj.size,this.maxFileZise);
+        if(obj.size <= this.maxFileZise) {
           if (this.url) {
             if (this.$parent.upload) {
               this.$parent.upload(obj, function (href) {

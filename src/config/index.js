@@ -1,6 +1,7 @@
 
 let defaultConf = {
   spellcheck: true,
+  maxFileZise: 1024 * 1024 * 50,
   toolbar: [
     'removeFormat', 'undo', 'redo', '|', 'element', 'fontName', 'fontSize', 'foreColor', 'backColor', 'divider', 'bold', 'italic', 'underline', 'strikeThrough',
     'link', 'unLink', 'divider', 'subscript', 'superscript', 'divider', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
