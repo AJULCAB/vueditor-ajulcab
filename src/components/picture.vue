@@ -117,7 +117,7 @@
             window.alert(this.lang.invalidFile)
           }
         }else{
-            window.alert(this.lang.maxFileZise+this.realFIlezize(this.maxFileZise) )
+            window.alert(this.lang.maxFileZise+this.realFIlezize(this.maxFileZise) +'Mb' )
         }
 
       },

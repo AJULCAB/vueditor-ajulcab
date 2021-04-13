@@ -1,6 +1,6 @@
 {
   "name": "@ajulcab/vueditor-ajulcab",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "a wysiwyg editor based on Vue.js and Vuex",
   "repository": {
     "type": "git",
